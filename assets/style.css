@@ -1,0 +1,15 @@
+li {
+    padding: 1.2% 3.5%;
+    color: brown;
+    display: inline-block;
+    cursor: default;
+}
+
+li:hover {
+    font-weight: bold;
+    cursor: default;
+}
+
+.selected {
+    background-color: green;
+}
