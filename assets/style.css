@@ -1,20 +1,25 @@
-li {
-    padding: 1.2% 3.5%;
-    color: brown;
-    display: inline-block;
-    cursor: default;
-}
-
-li:hover {
-    font-weight: bold;
-    cursor: default;
-}
-
-.selected {
-    background-color: green;
-}
-
-.done-button {
-    margin: 7%;
-    clear: both;
-}
+    li {
+        padding: 1.2% 3.5%;
+        color: brown;
+        display: inline-block;
+        cursor: default;
+    }
+    
+    li:hover {
+        font-weight: bold;
+        cursor: default;
+    }
+    
+    .selected {
+        background-color: green;
+    }
+    
+    .questions {
+        margin-bottom: 20%;
+    }
+    
+    .done-button {
+        margin: 7%;
+    }
+    
+    .actually_correct {}

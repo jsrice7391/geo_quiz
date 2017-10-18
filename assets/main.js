@@ -10,7 +10,10 @@ function shuffleArray(array) {
         array[i] = array[j];
         array[j] = temp;
     }
+
     return array
+
+
 }
 
 $(document).ready(function() {
@@ -25,30 +28,40 @@ $(document).ready(function() {
 
         $.ajax("https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple", {
             success: function(response) {
-                console.log(response)
-                console.log(response);
+                console.log(response.results)
+
                 $.each(response.results, function(index, question) {
                     $(".questions").append("<h3>" + question.question + "</h3>");
                     var correct_answer = [question.correct_answer];
                     all_answers = correct_answer.concat(question.incorrect_answers);
-                    console.log("These are the answers: " + all_answers);
+                    //Shuffles the array
                     shuffleArray(all_answers);
-                    console.log("This is the shuffled array: " + all_answers);
-                    for (let answer in all_answers) {
-                        if (all_answers[answer] == question.correct_answer) {
-                            $(".questions").append("<li class ='correct'>" + all_answers[answer] + "</li>");
+                    //Assign it to a new property in the object
+                    question.all_answers = all_answers;
+                    question.index = index;
+                    console.log("This is the question: " + question.question + " and its index is: " + question.index);
+                    for (var i = 0; i < 4; i++) {
+                        if (question.all_answers[i] == question.correct_answer) {
+                            $(".questions").append("<li class ='correct'>" + question.all_answers[i] + "</li>");
 
                         } else {
-                            $(".questions").append("<li>" + all_answers[answer] + "</li>");
+                            $(".questions").append("<li>" + question.all_answers[i] + "</li>");
                         }
                     }
-                });
+
+
+
+                })
             }
         })
-    })
+    });
+
 
     $(".questions").on("click", "li", function() {
         $(this).toggleClass("selected");
+        $(this).siblings("li").off();
+
+
         if ($(this).hasClass("selected") && $(this).hasClass("correct")) {
             correct++
         }
@@ -62,10 +75,9 @@ $(document).ready(function() {
 
 function end_game() {
     $(".questions").hide();
-
-    $(".results").html("You got " + correct + " answers correct");
+    $(".results").html("<h3>You got " + correct + " answers correct</h3>");
     $("#quest_gen, .results").show();
-
+    $(".done-button").hide();
 }
 
 
