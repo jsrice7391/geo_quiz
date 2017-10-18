@@ -3,11 +3,6 @@ var time = 60;
 var started = false;
 var correct = 0;
 
-
-
-
-
-
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -18,23 +13,15 @@ function shuffleArray(array) {
     return array
 }
 
-
-
-
 $(document).ready(function() {
     $(".done-button").hide();
 
-
-
-
     $("#quest_gen").on("click", function() {
+        time = 60;
         my_timer = setInterval(run_timer, 1000);
         $(".done-button").show();
         $("#quest_gen, .results").hide();
         $(".questions").show();
-
-
-
 
         $.ajax("https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple", {
             success: function(response) {
@@ -56,12 +43,8 @@ $(document).ready(function() {
                         }
                     }
                 });
-
             }
-
         })
-
-
     })
 
     $(".questions").on("click", "li", function() {
@@ -70,16 +53,10 @@ $(document).ready(function() {
             correct++
         }
     });
-
-
     $("#done").on("click", function() {
         clearInterval(my_timer);
         end_game();
     });
-
-
-
-
 });
 
 
