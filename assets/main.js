@@ -1,6 +1,9 @@
 var correct_answers = [];
 var time = 60;
 var started = false;
+var correct = 0;
+
+
 
 
 
@@ -19,9 +22,14 @@ function shuffleArray(array) {
 
 
 $(document).ready(function() {
+    $(".done-button").hide();
+
+
+
 
     $("#quest_gen").on("click", function() {
-        setInterval(show_time, 1000);
+        my_timer = setInterval(run_timer, 100);
+        $(".done-button").show();
 
 
 
@@ -47,20 +55,32 @@ $(document).ready(function() {
                 });
 
             }
+
         })
+
+
     })
 
     $(".questions").on("click", "li", function() {
         $(this).toggleClass("selected");
+        if ($(this).hasClass("selected") && $(this).hasClass("correct")) {
+            correct++
+        }
+    });
+
+
+    $(".done-button").on("click", function() {
+        $(".questions").hide();
+        $(".results").html("You got " + correct + " answers correct");
     });
 
 });
 
-function show_time() {
-    time--;
-    $("#timer").html("<h2>" + time + "</h2>");
+function run_timer() {
     if (time <= 0) {
-        started = false;
-        clearTimeout(set_timer);
+        clearInterval(my_timer);
+    } else {
+        time--;
+        $('#timer').html("<h2>" + time + "</h2>");
     }
 }

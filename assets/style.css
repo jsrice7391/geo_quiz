@@ -13,3 +13,8 @@ li:hover {
 .selected {
     background-color: green;
 }
+
+.done-button {
+    margin: 7%;
+    clear: both;
+}
