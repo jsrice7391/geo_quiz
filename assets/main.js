@@ -23,7 +23,7 @@ $(document).ready(function() {
         time = 60;
         my_timer = setInterval(run_timer, 1000);
         $(".done-button").show();
-        $("#quest_gen, .results").hide();
+        $("#quest_gen, .results, h2").hide();
         $(".questions").show();
 
         $.ajax("https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple", {
@@ -59,13 +59,19 @@ $(document).ready(function() {
 
     $(".questions").on("click", "li", function() {
         $(this).toggleClass("selected");
-        $(this).siblings("li").off();
+        if ($(".selected").length >= 11) {
+            alert("You have run out of answers");
+            end_game();
+        }
+
+
 
 
         if ($(this).hasClass("selected") && $(this).hasClass("correct")) {
             correct++
         }
     });
+
     $("#done").on("click", function() {
         clearInterval(my_timer);
         end_game();
@@ -74,10 +80,11 @@ $(document).ready(function() {
 
 
 function end_game() {
-    $(".questions").hide();
+    $(".questions").empty();
     $(".results").html("<h3>You got " + correct + " answers correct</h3>");
     $("#quest_gen, .results").show();
     $(".done-button").hide();
+    clearInterval(my_timer);
 }
 
 
