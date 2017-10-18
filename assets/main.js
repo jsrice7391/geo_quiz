@@ -28,8 +28,11 @@ $(document).ready(function() {
 
 
     $("#quest_gen").on("click", function() {
-        my_timer = setInterval(run_timer, 100);
+        my_timer = setInterval(run_timer, 1000);
         $(".done-button").show();
+        $("#quest_gen, .results").hide();
+        $(".questions").show();
+
 
 
 
@@ -69,16 +72,31 @@ $(document).ready(function() {
     });
 
 
-    $(".done-button").on("click", function() {
-        $(".questions").hide();
-        $(".results").html("You got " + correct + " answers correct");
+    $("#done").on("click", function() {
+        clearInterval(my_timer);
+        end_game();
     });
 
+
+
+
 });
+
+
+function end_game() {
+    $(".questions").hide();
+
+    $(".results").html("You got " + correct + " answers correct");
+    $("#quest_gen, .results").show();
+
+}
+
 
 function run_timer() {
     if (time <= 0) {
         clearInterval(my_timer);
+        end_game();
+
     } else {
         time--;
         $('#timer').html("<h2>" + time + "</h2>");
