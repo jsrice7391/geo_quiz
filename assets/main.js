@@ -1,4 +1,7 @@
 var correct_answers = [];
+var time = 60;
+var started = false;
+
 
 
 
@@ -18,9 +21,13 @@ function shuffleArray(array) {
 $(document).ready(function() {
 
     $("#quest_gen").on("click", function() {
+        setInterval(show_time, 1000);
+
+
 
         $.ajax("https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple", {
             success: function(response) {
+                console.log(response)
                 console.log(response);
                 $.each(response.results, function(index, question) {
                     $(".questions").append("<h3>" + question.question + "</h3>");
@@ -47,6 +54,13 @@ $(document).ready(function() {
         $(this).toggleClass("selected");
     });
 
+});
 
-
-})
+function show_time() {
+    time--;
+    $("#timer").html("<h2>" + time + "</h2>");
+    if (time <= 0) {
+        started = false;
+        clearTimeout(set_timer);
+    }
+}
