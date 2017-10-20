@@ -15,52 +15,68 @@ function shuffleArray(array) {
     return array
 }
 
+function generate_questions(difficulty, number) {
+
+
+    var query_call = "https://opentdb.com/api.php?amount=" + number + "&category=22&difficulty=" + difficulty + "&type=multiple";
+
+    console.log(query_call);
+
+    $.ajax(query_call, {
+        success: function(response) {
+            $.each(response.results, function(index, question) {
+                $(".questions").append("<h4>" + question.question + "</h4>");
+                var correct_answer = [question.correct_answer];
+                all_answers = correct_answer.concat(question.incorrect_answers);
+                //Shuffles the array
+                shuffleArray(all_answers);
+                //Assign it to a new property in the object
+                question.all_answers = all_answers;
+                question.index = index;
+                console.log("This is the question: " + question.question + " and its index is: " + question.index);
+                for (var i = 0; i < 4; i++) {
+                    if (question.all_answers[i] == question.correct_answer) {
+                        $(".questions").append("<li class ='correct'>" + question.all_answers[i] + "</li>");
+
+                    } else {
+                        $(".questions").append("<li>" + question.all_answers[i] + "</li>");
+                    }
+                }
+            })
+        }
+    })
+
+}
+
 
 
 
 $(document).ready(function() {
     $(".done-button").hide();
 
-    var difficulty = $("difficulty").attr("checked", true);
-    console.log(difficulty);
+
+
+
+    $("#diff_sub").on("click", function(event) {
+        event.preventDefault();
+        var difficulty = document.getElementById("diff_select");
+        diff_value = difficulty.options[difficulty.selectedIndex].value;
+        var num_quest = document.getElementById("num_ques");
+        num_of_ques = num_quest.options[num_quest.selectedIndex].value;
+
+    })
 
 
     $("#quest_gen").on("click", function() {
+        $(".header img").hide();
         $(".questions").empty();
         time = 60;
         my_timer = setInterval(run_timer, 1000);
         $(".done-button").show();
         $("#quest_gen, .results, h2").hide();
         $(".questions").show();
+        generate_questions(diff_value, num_of_ques);
 
-        $.ajax("https://opentdb.com/api.php?amount=10&category=22&difficulty=medium&type=multiple", {
-            success: function(response) {
-                console.log(response.results)
-
-                $.each(response.results, function(index, question) {
-                    $(".questions").append("<h3>" + question.question + "</h3>");
-                    var correct_answer = [question.correct_answer];
-                    all_answers = correct_answer.concat(question.incorrect_answers);
-                    //Shuffles the array
-                    shuffleArray(all_answers);
-                    //Assign it to a new property in the object
-                    question.all_answers = all_answers;
-                    question.index = index;
-                    console.log("This is the question: " + question.question + " and its index is: " + question.index);
-                    for (var i = 0; i < 4; i++) {
-                        if (question.all_answers[i] == question.correct_answer) {
-                            $(".questions").append("<li class ='correct'>" + question.all_answers[i] + "</li>");
-
-                        } else {
-                            $(".questions").append("<li>" + question.all_answers[i] + "</li>");
-                        }
-                    }
-
-
-
-                })
-            }
-        })
     });
 
 
@@ -92,7 +108,7 @@ function end_game() {
 
 
     $(".results").html("<h3>You got " + correct + " answers correct</h3>");
-    $(".results").append("")
+    $(".results").append("<h3>You got: " + incorrect_answers + " answers incorrect.");
     $("#quest_gen, .results").show();
     $(".done-button").hide();
     clearInterval(my_timer);

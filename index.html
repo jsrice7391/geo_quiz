@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="assets/style.css">
 
     <title>Around the World</title>
@@ -17,19 +19,50 @@
 
     <div class="container">
         <div class="row text-center">
-            <h1 class="text-center">Around the World</h1>
-            <h2>Click the start button and see how many Geography questions you can answer in under a minute.</h2>
-            <button id="quest_gen" class="text-center  btn btn-primary">Start</button>
-            <span id="timer">60</span>
+            <div class="header">
+                <h1 class="text-center"><span class="glyphicon glyphicon-globe"></span> Around the World <span class="glyphicon glyphicon-globe"></span></h1>
+                <h3 class="text center"> with Carmen San Diego</h3>
+                <img src="assets/carmen_sandiego.jpeg" />
+
+
+                <form id="diff">
+                    <label>Select Difficulty:</label>
+                    <select id="diff_select" name="diff" class="form_for_diff">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                    <br>
+                    <label>Select amount of questions</label>
+                    <select id="num_ques" name="num_ques" class="form_for_dif">
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                </select>
+                    <br>
+                    <input type="submit" value="Submit" id="diff_sub" />
+                </form>
+
+
+
+
+
+
+                <button id="quest_gen" class="text-center  btn btn-primary">Start</button>
+                <span id="timer">60</span>
+                <div class="results text-center">
+                </div>
+
+            </div>
 
 
         </div>
 
         <div class="col-md-10 col-md-offset-1">
             <div class="questions">
-
-            </div>
-            <div class="results text-center">
 
             </div>
 
