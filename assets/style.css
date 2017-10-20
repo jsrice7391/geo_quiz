@@ -1,25 +1,35 @@
-    li {
-        padding: 1.2% 3.5%;
-        color: brown;
-        display: inline-block;
-        cursor: default;
-    }
-    
-    li:hover {
-        font-weight: bold;
-        cursor: default;
-    }
-    
-    .selected {
-        background-color: green;
-    }
-    
-    .questions {
-        margin-bottom: 20%;
-    }
-    
-    .done-button {
-        margin: 7%;
-    }
-    
-    .actually_correct {}
+   body {
+       background-color: black;
+       color: white;
+   }
+   
+   li {
+       padding: 1.2% 3.5%;
+       color: brown;
+       display: inline-block;
+       cursor: default;
+   }
+   
+   li:hover {
+       font-weight: bold;
+       cursor: default;
+   }
+   
+   .selected {
+       background-color: green;
+   }
+   
+   .questions {
+       margin-bottom: 20%;
+   }
+   
+   .done-button {
+       margin: 7%;
+   }
+   
+   .actually_correct {
+       background-image: url("carmen.gif");
+       height: 70px;
+       width: 70px;
+       color: white;
+   }

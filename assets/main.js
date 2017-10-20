@@ -2,6 +2,8 @@ var correct_answers = [];
 var time = 60;
 var started = false;
 var correct = 0;
+var incorrect_answers = 0;
+
 
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
@@ -10,16 +12,21 @@ function shuffleArray(array) {
         array[i] = array[j];
         array[j] = temp;
     }
-
     return array
-
-
 }
+
+
+
 
 $(document).ready(function() {
     $(".done-button").hide();
 
+    var difficulty = $("difficulty").attr("checked", true);
+    console.log(difficulty);
+
+
     $("#quest_gen").on("click", function() {
+        $(".questions").empty();
         time = 60;
         my_timer = setInterval(run_timer, 1000);
         $(".done-button").show();
@@ -64,11 +71,10 @@ $(document).ready(function() {
             end_game();
         }
 
-
-
-
         if ($(this).hasClass("selected") && $(this).hasClass("correct")) {
             correct++
+        } else if ($(this).hasClass("selected") && $(this).not("correct")) {
+            incorrect_answers++;
         }
     });
 
@@ -80,8 +86,13 @@ $(document).ready(function() {
 
 
 function end_game() {
-    $(".questions").empty();
+
+    $(".correct").addClass("actually_correct");
+    $(".selected").css("opacity", ".6");
+
+
     $(".results").html("<h3>You got " + correct + " answers correct</h3>");
+    $(".results").append("")
     $("#quest_gen, .results").show();
     $(".done-button").hide();
     clearInterval(my_timer);
