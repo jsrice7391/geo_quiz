@@ -107,10 +107,9 @@ $(document).ready(function() {
 
 function end_game() {
 
+    $("#diff").show();
     $(".correct").addClass("actually_correct");
     $(".selected").css("opacity", ".6");
-
-
     $(".results").html("<h3>You got " + correct + " answers correct</h3>");
     $(".results").append("<h3>You got: " + incorrect_answers + " answers incorrect.");
     $("#quest_gen, .results").show();
