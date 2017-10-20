@@ -53,6 +53,8 @@ function generate_questions(difficulty, number) {
 
 $(document).ready(function() {
     $(".done-button").hide();
+    $("#quest_gen").hide();
+
 
 
 
@@ -63,11 +65,13 @@ $(document).ready(function() {
         diff_value = difficulty.options[difficulty.selectedIndex].value;
         var num_quest = document.getElementById("num_ques");
         num_of_ques = num_quest.options[num_quest.selectedIndex].value;
+        $("#quest_gen").show();
 
     })
 
 
     $("#quest_gen").on("click", function() {
+        $("#diff").hide();
         $(".header img").hide();
         $(".questions").empty();
         time = 60;
